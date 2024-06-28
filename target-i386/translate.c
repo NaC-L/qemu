@@ -1455,11 +1455,9 @@ static void gen_shift_rm_T1(DisasContext *s, TCGMemOp ot, int op1,
 
     if (is_right) {
         if (is_arith) {
-            gen_exts(ot, cpu_T[0]);
             tcg_gen_sar_tl(cpu_tmp0, cpu_T[0], cpu_tmp0);
             tcg_gen_sar_tl(cpu_T[0], cpu_T[0], cpu_T[1]);
         } else {
-            gen_extu(ot, cpu_T[0]);
             tcg_gen_shr_tl(cpu_tmp0, cpu_T[0], cpu_tmp0);
             tcg_gen_shr_tl(cpu_T[0], cpu_T[0], cpu_T[1]);
         }
@@ -1489,11 +1487,9 @@ static void gen_shift_rm_im(DisasContext *s, TCGMemOp ot, int op1, int op2,
     if (op2 != 0) {
         if (is_right) {
             if (is_arith) {
-                gen_exts(ot, cpu_T[0]);
                 tcg_gen_sari_tl(cpu_tmp4, cpu_T[0], op2 - 1);
                 tcg_gen_sari_tl(cpu_T[0], cpu_T[0], op2);
             } else {
-                gen_extu(ot, cpu_T[0]);
                 tcg_gen_shri_tl(cpu_tmp4, cpu_T[0], op2 - 1);
                 tcg_gen_shri_tl(cpu_T[0], cpu_T[0], op2);
             }
